@@ -1,5 +1,7 @@
 package com.sparta.apiproject.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity

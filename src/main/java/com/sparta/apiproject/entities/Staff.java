@@ -1,5 +1,9 @@
 package com.sparta.apiproject.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.time.Instant;
 
@@ -17,6 +21,7 @@ public class Staff {
     @Column(name = "last_name", nullable = false, length = 45)
     private String lastName;
 
+    @JsonIgnore
     @ManyToOne(optional = false)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
@@ -27,6 +32,7 @@ public class Staff {
     @Column(name = "email", length = 50)
     private String email;
 
+    @JsonIgnore
     @ManyToOne(optional = false)
     @JoinColumn(name = "store_id", nullable = false)
     private Store store;
@@ -92,7 +98,7 @@ public class Staff {
     }
 
     public byte[] getPicture() {
-        return picture;
+        return null;
     }
 
     public void setPicture(byte[] picture) {
