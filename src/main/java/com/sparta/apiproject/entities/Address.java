@@ -10,6 +10,9 @@ public class Address {
     @Column(name = "address_id", nullable = false)
     private Integer id;
 
+    public Address() {
+    }
+
     public Integer getId() {
         return id;
     }

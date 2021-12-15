@@ -17,7 +17,7 @@ public class Staff {
     @Column(name = "last_name", nullable = false, length = 45)
     private String lastName;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false, referencedColumnName = "address_id")
     private Address address;
 

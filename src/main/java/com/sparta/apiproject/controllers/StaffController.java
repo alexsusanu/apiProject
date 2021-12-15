@@ -1,9 +1,11 @@
 package com.sparta.apiproject.controllers;
 
+import com.sparta.apiproject.entities.Address;
 import com.sparta.apiproject.entities.Staff;
 import com.sparta.apiproject.repositories.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,8 +15,10 @@ import java.util.Optional;
 public class StaffController {
     @Autowired
     private StaffRepository staffRepository;
+
     @GetMapping(value = "/sakila/allstaff")
     public List<Staff> getAllStaff() { return staffRepository.findAll(); }
+
     @GetMapping(value = "/sakila/staff")
     public Staff getStaff(@RequestParam Integer id) {
         Optional<Staff> result = staffRepository.findById(id);
