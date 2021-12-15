@@ -18,7 +18,7 @@ public class Staff {
     private String lastName;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "address_id", nullable = false)
+    @JoinColumn(name = "address_id", nullable = false, referencedColumnName = "address_id")
     private Address address;
 
     @Column(name = "picture")
@@ -28,8 +28,9 @@ public class Staff {
     private String email;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "store_id", nullable = false)
+    @JoinColumn(name = "store_id", nullable = false, referencedColumnName = "store_id")
     private Store store;
+
 
     @Column(name = "active", nullable = false)
     private Boolean active = false;
@@ -123,7 +124,15 @@ public class Staff {
         this.firstName = firstName;
     }
 
-  public Integer getId() {
+//    public Integer getAddressID() { return addressID; }
+//
+//    public void setAddressID(Integer addressID) { this.addressID = addressID; }
+//
+//    public Integer getStoreID() { return storeID; }
+//
+//    public void setStoreID(Integer storeID) { this.storeID = storeID; }
+
+    public Integer getId() {
         return id;
     }
 
