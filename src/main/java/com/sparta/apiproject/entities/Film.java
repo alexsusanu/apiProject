@@ -1,7 +1,5 @@
 package com.sparta.apiproject.entities;
 
-import com.sparta.apiproject.Language;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.Instant;
