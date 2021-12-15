@@ -5,13 +5,12 @@ import java.time.Instant;
 
 @Entity
 @Table(name = "store")
-public class Store
-{
+public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "store_id", nullable = false)
     private Integer id;
-
+  
     @ManyToOne(optional = false)
     @JoinColumn(name = "manager_staff_id", nullable = false)
     private Staff managerStaff;
