@@ -1,7 +1,9 @@
 package com.sparta.apiproject.controllers;
 
 import com.sparta.apiproject.entities.Film;
+import com.sparta.apiproject.entities.FilmActor;
 import com.sparta.apiproject.entities.FilmText;
+import com.sparta.apiproject.repositories.FilmActorRepository;
 import com.sparta.apiproject.repositories.FilmRepository;
 import com.sparta.apiproject.repositories.FilmTextRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ public class FilmController {
     private FilmRepository filmRepository;
     @Autowired
     private FilmTextRepository filmTextRepository;
+    @Autowired
+    private FilmActorRepository filmActorRepository;
 
     @GetMapping(value="/sakila/film")
     public Film getFilmById(@RequestParam Integer id){
@@ -39,7 +43,13 @@ public class FilmController {
 
     @DeleteMapping(value="/sakila/film/delete")
     public String deleteFilm(@RequestParam Integer id){
-        // TODO: delete any entities depending on the current film 
+        // TODO: delete any entities depending on the current film
+        for(FilmActor filmActor: filmActorRepository.findAll()){
+            if(id == filmActor.getFilmId()){
+                long filmActorID = filmActor.getId();
+                filmActorRepository.deleteById(filmActorID);
+            }
+        }
         filmRepository.deleteById(id);
         return "Film with id " + id + " has been deleted";
     }
