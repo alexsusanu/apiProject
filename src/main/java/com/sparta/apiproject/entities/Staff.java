@@ -20,7 +20,6 @@ public class Staff {
     private String lastName;
 
     @ManyToOne(optional = false)
-    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
