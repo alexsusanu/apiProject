@@ -15,19 +15,20 @@ import java.util.Optional;
 public class FilmController {
     @Autowired
     private FilmRepository filmRepository;
+    @Autowired
     private FilmTextRepository filmTextRepository;
 
-    @GetMapping(value="/film")
+    @GetMapping(value="/sakila/film")
     public Film getFilmById(@RequestParam Integer id){
         return filmRepository.getById(id);
     }
 
-    @GetMapping(value="/films")
+    @GetMapping(value="/sakila/films")
     public List<Film> getAllFilms(){
         return filmRepository.findAll();
     }
 
-    @PostMapping(value="/film/insert")
+    @PostMapping(value="/sakila/film/insert")
     public String insertFilm(@RequestBody Film film){
         if(filmRepository.getById(film.getId()) != null){
             return "A film with this id already exists";
@@ -36,7 +37,7 @@ public class FilmController {
         return "Saved";
     }
 
-    @DeleteMapping(value="film/delete")
+    @DeleteMapping(value="/sakila/film/delete")
     public String deleteFilm(@RequestParam Integer id){
         if(filmRepository.getById(id) == null){
             return "There was no film with this id in the database";
@@ -45,7 +46,7 @@ public class FilmController {
         return "Film with id " + id + " has been deleted";
     }
 
-    @PutMapping(value="film/update")
+    @PutMapping(value="/sakila/film/update")
     public Film updateFilm(@RequestBody Film newState) {
         Optional<Film> oldState = filmRepository.findById(newState.getId());
         if(oldState.isEmpty())
@@ -54,23 +55,23 @@ public class FilmController {
         return newState;
     }
 
-    @GetMapping(value = "/filmDescription")
+    @GetMapping(value = "/sakila/filmDescription")
     public FilmText getFilmTextById (@RequestParam Integer id) {
         return filmTextRepository.getById(id);
     }
 
-    @GetMapping(value = "/filmsDescription")
+    @GetMapping(value = "/sakila/filmsDescription")
     public List<FilmText> getAllFilmText() {
         return filmTextRepository.findAll();
     }
 
-    @DeleteMapping(value="filmDescription/delete")
+    @DeleteMapping(value="/sakila/filmDescription/delete")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteFilmText(@RequestParam Integer id) {
-            filmTextRepository.deleteById(id);
+        filmTextRepository.deleteById(id);
     }
 
-    @PutMapping(value = "/filmDescription/update")
+    @PutMapping(value = "/sakila/filmDescription/update")
     public FilmText updateDescription(@RequestBody FilmText newState) {
         Optional<FilmText> oldState = filmTextRepository.findById(newState.getId());
         if(oldState.isEmpty())
@@ -79,7 +80,7 @@ public class FilmController {
         return newState;
     }
 
-    @PostMapping(value = "/filmDescription/insert")
+    @PostMapping(value = "/sakila/filmDescription/insert")
     public FilmText insertFilmText(@RequestBody FilmText newFilmText) {
         filmTextRepository.save(newFilmText);
         return newFilmText;
