@@ -1,19 +1,14 @@
-package com.sparta.apiproject.entities;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
+package com.sparta.apiproject;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "address")
-public class Address {
+@Table(name = "language")
+public class Language {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "address_id", nullable = false)
+    @Column(name = "language_id", nullable = false)
     private Integer id;
-
-    public Address() {
-    }
 
     public Integer getId() {
         return id;
