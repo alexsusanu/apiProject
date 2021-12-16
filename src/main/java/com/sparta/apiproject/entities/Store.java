@@ -1,8 +1,6 @@
 package com.sparta.apiproject.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -15,10 +13,12 @@ public class Store {
     @Column(name = "store_id", nullable = false)
     private Integer id;
 
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @ManyToOne(optional = false)
     @JoinColumn(name = "manager_staff_id", nullable = false)
     private Staff managerStaff;
 
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @ManyToOne(optional = false)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
