@@ -1,6 +1,8 @@
 package com.sparta.apiproject.entities;
 
 import com.fasterxml.jackson.annotation.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -8,6 +10,8 @@ import java.time.Instant;
 @Entity
 @Table(name = "staff")
 public class Staff {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "staff_id", nullable = false)
@@ -19,7 +23,7 @@ public class Staff {
     @Column(name = "last_name", nullable = false, length = 45)
     private String lastName;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
@@ -30,7 +34,7 @@ public class Staff {
     private String email;
 
     @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property = "id")
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id", nullable = false)
     private Store store;
 

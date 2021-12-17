@@ -2,6 +2,8 @@ package com.sparta.apiproject.controllers;
 
 import com.sparta.apiproject.entities.Store;
 import com.sparta.apiproject.repositories.StoreRepository;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +39,7 @@ public class  StoreController
         return newStore;
     }
 
+    @Cascade(CascadeType.DELETE)
     @DeleteMapping(value="/sakila/store/delete")
     @ResponseStatus(value= HttpStatus.NO_CONTENT)
     public void deleteStore(@RequestParam Integer id)

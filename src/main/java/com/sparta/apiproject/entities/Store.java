@@ -14,11 +14,11 @@ public class Store {
     private Integer id;
 
 
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_staff_id", nullable = false)
     private Staff managerStaff;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
