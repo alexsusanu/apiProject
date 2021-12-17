@@ -25,13 +25,13 @@ public class StaffTest {
     @Test
     public void staffFirstNameTest() throws IOException {
         Staff staff = mapper.readValue(new URL("http://localhost:8080/sakila/staff?id=2"), Staff.class);
-        assertEquals("Talal", staff.getFirstName());
+        assertEquals("Jon", staff.getFirstName());
     }
 
     @Test
     public void staffLastNameTest() throws IOException {
         Staff staff = mapper.readValue(new URL("http://localhost:8080/sakila/staff?id=2"), Staff.class);
-        assertEquals("Thaheem", staff.getLastName());
+        assertEquals("Stephens", staff.getLastName());
     }
 
     @Test
