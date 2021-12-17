@@ -66,9 +66,10 @@ public class FilmController {
     }
 
     @DeleteMapping(value="/sakila/filmDescription/delete")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteFilmText(@RequestParam Integer id) {
+//    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public String deleteFilmText(@RequestParam Integer id) {
         filmTextRepository.deleteById(id);
+        return "Film with id " + id + " has been deleted";
     }
 
     @PutMapping(value = "/sakila/filmDescription/update")
