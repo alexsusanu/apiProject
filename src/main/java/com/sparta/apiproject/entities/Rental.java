@@ -3,13 +3,13 @@ package com.sparta.apiproject.entities;
 import com.sparta.apiproject.entities.Customer;
 import com.sparta.apiproject.entities.Inventory;
 import com.sparta.apiproject.entities.Staff;
-
 import javax.persistence.*;
 import java.time.Instant;
 
 @Entity
 @Table(name = "rental")
 public class Rental {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rental_id", nullable = false)
