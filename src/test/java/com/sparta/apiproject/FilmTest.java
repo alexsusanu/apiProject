@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.sparta.apiproject.controllers.FilmController;
 import com.sparta.apiproject.entities.Film;
 import com.sparta.apiproject.repositories.FilmRepository;
@@ -18,10 +19,10 @@ import java.util.List;
 
 public class FilmTest {
     private static ObjectMapper mapper;
-    private static FilmController filmController;
     @BeforeAll
     public static void setup(){
         mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         mapper.setVisibility(VisibilityChecker.Std.defaultInstance().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
     }
@@ -31,7 +32,7 @@ public class FilmTest {
     public void getFilm(){
         try {
             Film film = mapper.readValue(new URL("http://localhost:8080/sakila/film?id=1"), Film.class);
-            assert(film.getTitle() == "ACADEMY DINOSAUR");
+            assert(film.getTitle().equals("ACADEMY DINOSAUR"));
         } catch (IOException e) {
             e.printStackTrace();
         }
