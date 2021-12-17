@@ -1,4 +1,4 @@
-package com.sparta.apiproject;
+package com.sparta.apiproject.entities;
 
 import javax.persistence.*;
 
