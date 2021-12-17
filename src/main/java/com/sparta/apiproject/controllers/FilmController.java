@@ -31,7 +31,6 @@ public class FilmController {
 
     @GetMapping(value="/sakila/film")
     public Film getFilmById(@RequestParam Integer id){
-        System.out.println("Number of film actors: " + filmActorRepository.findAll());
         return filmRepository.getById(id);
     }
 
