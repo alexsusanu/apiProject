@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.sparta.apiproject.controllers.FilmController;
+import com.sparta.apiproject.repositories.FilmTextRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,26 +17,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class FilmTextTest {
 
     @Autowired
-    private FilmController controller;
-    @Autowired
-    ObjectMapper mapper;
+    private FilmText filmText;
 
     @Test
     public void filmTest() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-        mapper.setVisibility(VisibilityChecker.Std.defaultInstance().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
-        FilmText film = mapper.readValue(new URL("http://localhost:8080/sakila/filmDescription?id=1300"), FilmText.class);
-        assertEquals("INTERSTELLA", film.getTitle());
+        filmText = mapper.readValue(new URL("http://localhost:8080/sakila/filmDescription?id=1"), FilmText.class);
+        assertEquals("ACADEMY DINOSAUR", filmText.getTitle());
     }
 
     @Test
     public void filmIdTest() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-        mapper.setVisibility(VisibilityChecker.Std.defaultInstance().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
-        FilmText film = mapper.readValue(new URL("http://localhost:8080/sakila/filmDescription?id=1300"), FilmText.class);
-        assertEquals(1300, film.getId());
+        FilmText film = mapper.readValue(new URL("http://localhost:8080/sakila/filmDescription?id=1"), FilmText.class);
+        assertEquals(1, film.getId());
     }
 
 

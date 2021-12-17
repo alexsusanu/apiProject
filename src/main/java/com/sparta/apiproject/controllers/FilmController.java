@@ -149,8 +149,19 @@ public class FilmController {
     }
 
     @GetMapping(value = "/sakila/filmDescription")
-    public FilmText getFilmTextById (@RequestParam Integer id) {
-        return filmTextRepository.getById(id);
+    public ResponseEntity<String> getFilmTextById (@RequestParam Integer id) {
+        Optional<FilmText> result = filmTextRepository.findById(id);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("content-type", "application/json; charset=utf-8");
+        if (result.isPresent()) {
+            try {
+                ResponseEntity<String> resp = new ResponseEntity<String>(objectMapper.writeValueAsString(result.get()), headers, HttpStatus.OK);
+                return resp;
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+        }
+        return new ResponseEntity<String>("{\"title\": \"That film doesnt exist\"}", headers,HttpStatus.OK);
     }
 
     @GetMapping(value = "/sakila/filmsDescription")
