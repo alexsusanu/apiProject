@@ -1,29 +1,41 @@
 package com.sparta.apiproject.entities;
+
+import com.sparta.apiproject.entities.Customer;
+import com.sparta.apiproject.entities.Inventory;
+import com.sparta.apiproject.entities.Staff;
 import javax.persistence.*;
 import java.time.Instant;
+
 @Entity
 @Table(name = "rental")
-public class Rental
-{
+public class Rental {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rental_id", nullable = false)
     private Integer id;
+
     @Column(name = "rental_date", nullable = false)
     private Instant rentalDate;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "inventory_id", nullable = false)
     private Inventory inventory;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
+
     @Column(name = "return_date")
     private Instant returnDate;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "staff_id", nullable = false)
     private Staff staff;
+
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
+
     public Instant getLastUpdate() {
         return lastUpdate;
     }

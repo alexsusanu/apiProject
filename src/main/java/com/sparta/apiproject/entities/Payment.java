@@ -1,5 +1,8 @@
 package com.sparta.apiproject.entities;
 
+import com.sparta.apiproject.entities.Customer;
+import com.sparta.apiproject.entities.Rental;
+import com.sparta.apiproject.entities.Staff;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.Instant;

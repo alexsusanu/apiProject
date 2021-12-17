@@ -1,5 +1,7 @@
 package com.sparta.apiproject.entities;
 
+import com.sparta.apiproject.entities.Film;
+import com.sparta.apiproject.entities.Store;
 import javax.persistence.*;
 import java.time.Instant;
 
