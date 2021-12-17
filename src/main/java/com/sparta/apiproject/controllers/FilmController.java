@@ -52,7 +52,14 @@ public class FilmController {
     @DeleteMapping(value="/sakila/film/delete")
     @Transactional
     public String deleteFilm(@RequestParam Integer id){
-        // TODO: delete any entities depending on the current film
+        List<FilmText> filmTextToDelete = new ArrayList<>();
+        for(FilmText filmText: filmTextRepository.findAll()){
+            if(filmText.equals(id)){
+                filmTextToDelete.add(filmText);
+            }
+        }
+        filmTextRepository.deleteAll(filmTextToDelete);
+
         List<FilmActor> filmActorsToDelete = new ArrayList<>();
         for(FilmActor filmActor: filmActorRepository.findAll()){
             Integer filmId = filmActor.getId().getFilmId();
