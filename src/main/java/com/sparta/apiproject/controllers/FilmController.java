@@ -1,9 +1,13 @@
 package com.sparta.apiproject.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.apiproject.entities.*;
 import com.sparta.apiproject.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,9 +33,24 @@ public class FilmController {
     @Autowired
     private PaymentRepository paymentRepository;
 
+    @Autowired
+    ObjectMapper objectMapper;
+
     @GetMapping(value="/sakila/film")
-    public Film getFilmById(@RequestParam Integer id){
-        return filmRepository.getById(id);
+
+    public ResponseEntity<String> getFilmById(@RequestParam Integer id){
+        Optional<Film> result = filmRepository.findById(id);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("content-type", "application/json; charset=utf-8");
+        if (result.isPresent()) {
+            try {
+                ResponseEntity<String> resp = new ResponseEntity<String>(objectMapper.writeValueAsString(result.get()), headers, HttpStatus.OK);
+                return resp;
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+        }
+        return new ResponseEntity<String>("{\"message\": \"That actor doesnt exist\"}", headers,HttpStatus.OK);
     }
 
     @GetMapping(value="/sakila/films")
@@ -141,9 +160,9 @@ public class FilmController {
     }
 
     @DeleteMapping(value="/sakila/filmDescription/delete")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteFilmText(@RequestParam Integer id) {
-            filmTextRepository.deleteById(id);
+    public String deleteFilmText(@RequestParam Integer id) {
+        filmTextRepository.deleteById(id);
+        return "Film with id " + id + " has been deleted";
     }
 
     @PutMapping(value = "/sakila/filmDescription/update")
