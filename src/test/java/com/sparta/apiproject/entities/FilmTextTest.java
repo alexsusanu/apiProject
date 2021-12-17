@@ -26,7 +26,7 @@ public class FilmTextTest {
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         mapper.setVisibility(VisibilityChecker.Std.defaultInstance().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
         FilmText film = mapper.readValue(new URL("http://localhost:8080/sakila/filmDescription?id=1300"), FilmText.class);
-        assertEquals("INTERSTELLA", film.getTitle());
+        assertEquals("INTERSTELLAR", film.getTitle());
     }
 
     @Test
