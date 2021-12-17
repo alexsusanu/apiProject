@@ -1,5 +1,8 @@
 package com.sparta.apiproject.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.time.Instant;
 
@@ -27,6 +30,7 @@ public class Staff {
     @Column(name = "email", length = 50)
     private String email;
 
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @ManyToOne(optional = false)
     @JoinColumn(name = "store_id", nullable = false)
     private Store store;
