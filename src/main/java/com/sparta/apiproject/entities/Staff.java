@@ -99,7 +99,7 @@ public class Staff {
     }
 
     public byte[] getPicture() {
-        return null;
+        return picture;
     }
 
     public void setPicture(byte[] picture) {
